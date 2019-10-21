@@ -1,9 +1,8 @@
 import React, { Component } from 'react';  
-import {Header} from '../components/Header';
-import App from '../App';
-import { NewsCard } from '../components/NewsCard';
+import {Header} from '../../components/Header';
+import { SourceCard } from '../../components/SourceCard';
 import { Container, Row, Col } from 'react-bootstrap';
-import * as Constants from '../config/Constants';
+import * as Constants from '../../config/Constants';
 class Home extends Component { 
     constructor(){
         super();
@@ -18,14 +17,12 @@ class Home extends Component {
         .then(res => res.json())
         .then(
           (result) => {
-              console.log('result', result)
+             
             this.setState({
                 newsCardData: result.sources
             });
           },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
+         
           (error) => {
             console.log('error', error);            
           }
@@ -33,31 +30,31 @@ class Home extends Component {
     }
 
     changeCountry = (value) => {
-        console.log(value)
+        
     }
 
     render(){    
     return (
         <div>
-        <Header changeCountry = {this.changeCountry} />
+        <Header changeCountry = {this.changeCountry}/>
         <Container>
             <Row style={{ marginTop: 30, marginBottom: 30 }}>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
             </Row>
             <Row style={{ marginTop: 30, marginBottom: 30 }}>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
             </Row>
             <Row style={{ marginTop: 30, marginBottom: 30 }}>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
-                <Col><NewsCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
+                <Col><SourceCard /></Col>
             </Row>            
         </Container>  
         </div>

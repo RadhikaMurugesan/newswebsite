@@ -1,31 +1,22 @@
-import React, { Component } from 'react';  
-import { Navbar, Nav, Form, FormControl, Button, Dropdown } from 'react-bootstrap'; 
+import React, { Component, useState, useEffect } from 'react';  
+import './styles.css'; 
 import {CountryObject} from '../../config/Constants';
 
 function Header (props) {
-    console.log('props', props);
-    
+   
+  const [country, setCountry] = useState(''); 
+ 
+
       return (
-          <div>   
-                <Navbar bg="light" variant="light">
-                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-                    <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    </Nav>
-                    <Form inline>
-                    {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-primary">Search</Button> */}
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label style={{ marginRight: 10 }}>Country</Form.Label>
-                        <Form.Control as="select" onChange={(value) => props.changeCountry(value)}>                     
-                        {CountryObject.map((country) => <option>{country.name}</option> )}
-                       
-                        </Form.Control>
-                    </Form.Group>
-                    </Form>
-                   
-                </Navbar>
-          </div>
+            
+            <div class="topnav"> 
+                <h5>MyNews</h5> 
+                <a href="#home">Home</a>
+                <select className="selectCountry" value={country} onChange={(event) => setCountry(event.target.value)} >
+                {CountryObject.map((country) => <option>{country.name}</option> )} 
+                </select>
+            </div>
+         
       )
     }
 

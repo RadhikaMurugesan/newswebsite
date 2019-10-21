@@ -1,0 +1,28 @@
+.nameDiv{
+    background-color: #494ca2;
+    padding: 10px;
+    color: #f2f2f2;
+    font-size: 17px;
+
+}
+
+.descDiv{
+    background-color: #8186d5;
+    padding: 10px;
+    color: #f2f2f2;
+   
+}
+
+.descText{
+    margin-bottom: 0;
+    color: #f2f2f2;
+    font-size: 14px;
+}
+
+.linkDiv{
+    background-color: #c6cbef;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;;
+
+}
