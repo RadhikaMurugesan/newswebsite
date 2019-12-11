@@ -1,27 +1,60 @@
-import React, { Component } from 'react'; 
-// import Globe from '../../assets/icons/internet.svg' 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import React from 'react'; 
+import { FaGlobe, FaBusinessTime, FaNewspaper, FaAirFreshener, FaMedapps, FaTablet, FaBasketballBall, FaTrello } from "react-icons/fa";
+import { Card, Icon } from 'semantic-ui-react'
 import './styles.css';
-class SourceCard extends Component {
-    render() {
-        return(
-            <div >
-                <div className="nameDiv">
-                    <bold className="nameText">ABC News</bold>
-                </div>
-                <div className="descDiv">
-                    <p className="descText">We will build a small game during this tutorial.
-                    You might be tempted to skip it because you’re not building games — but give it a chance.
-                    The techniques you’ll learn in the tutorial are fundamental to building any React app,
-                    and mastering it will give you a deep understanding of React.</p>
-                </div>
-                <div className="linkDiv">
-                    <span><FontAwesomeIcon icon={faCoffee} /> General</span>
-                    {/* <span><Globe /></span> */}
-                </div>
-            </div>
-        );
+
+function random_bg_color() {
+    var x = Math.floor(Math.random() * 256);
+    var y = Math.floor(Math.random() * 256);
+    var z = Math.floor(Math.random() * 256);
+    var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+ console.log(bgColor);
+  return bgColor;
+   
     }
-}  
+
+function SourceCard(props) {
+   
+      let bgColor = random_bg_color();
+    console.log('bgcolor', bgColor);
+    
+        
+
+    return (
+            <div className="mainDiv" style={{backgroundColor:bgColor}}>
+                    <div className="nameDiv">
+                            <h4 className="nameText">{props.sourceCardData.name}</h4>
+                    </div>
+                    <div className="descDiv">
+                            <p className="descText">{props.sourceCardData.description}</p>
+                    </div>
+                    <div className="linkDiv">
+                            <span>{props.sourceCardData.category[0].toUpperCase()+props.sourceCardData.category.slice(1)}
+                                    {
+                                            props.sourceCardData.category == 'business' ? <FaBusinessTime />
+                                                    :
+                                                    props.sourceCardData.category == 'general' ? <FaNewspaper />
+                                                            :
+                                                            props.sourceCardData.category == 'entertainment' ? <FaAirFreshener />
+                                                                    :
+                                                                    props.sourceCardData.category == 'health' ? <FaMedapps />
+                                                                            :
+                                                                            props.sourceCardData.category == 'science' ? <FaTablet />
+                                                                                    :
+                                                                                    props.sourceCardData.category == 'sports' ? <FaBasketballBall />
+                                                                                            :
+                                                                                            props.sourceCardData.category == 'technology' ? <FaTrello />
+                                                                                                    :
+                                                                                                    null
+                                    }
+                            </span>
+                            <span><a href={props.sourceCardData.url} target="_blank"><FaGlobe /></a></span>
+                    </div>
+            </div>
+    );
+
+
+}
+
+
 export default SourceCard;
