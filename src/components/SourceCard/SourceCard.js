@@ -29,8 +29,10 @@ function SourceCard(props) {
                             <p className="descText">{props.sourceCardData.description}</p>
                     </div>
                     <div className="linkDiv">
-                            <span>{props.sourceCardData.category[0].toUpperCase()+props.sourceCardData.category.slice(1)}
-                                    {
+                            <div>
+                                    <span className="catStyle">{props.sourceCardData.category[0].toUpperCase()+props.sourceCardData.category.slice(1)}</span>
+                                    <span>
+                                            {
                                             props.sourceCardData.category == 'business' ? <FaBusinessTime />
                                                     :
                                                     props.sourceCardData.category == 'general' ? <FaNewspaper />
@@ -47,10 +49,12 @@ function SourceCard(props) {
                                                                                                     :
                                                                                                     null
                                     }
-                            </span>
-                            <span><a href={props.sourceCardData.url} target="_blank"><FaGlobe /></a></span>
+                                    </span>
+                            </div>
+                            <div><a href={props.sourceCardData.url} target="_blank"><FaGlobe /></a></div>
                     </div>
             </div>
+        
     );
 
 

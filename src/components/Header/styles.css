@@ -2,8 +2,8 @@
 .topnav {
   background-color: #090057;
   overflow: hidden;
-  /* padding: 20px 10px; */
-  
+  position: relative;
+ 
   }
 
 /* Style the links inside the navigation bar */
@@ -15,39 +15,34 @@ padding: 12px;
 text-decoration: none; 
 font-size: 17px;
 font-weight: bold;
-line-height: 84px;
+border-radius: 4px;
+}
+
+.topnav span {
+  float: left;
+color: white;
+text-align: center;
+padding: 12px;
+text-decoration: none; 
+font-size: 17px;
+font-weight: bold;
+
 border-radius: 4px;
 }
 
 .selectCountry {
 
-  float: right;
   color: black;
   text-align: center;
-  padding: 8px;
+  padding: 5px;
   text-decoration: none;
   font-size: 17px;
-  border-radius: 4px;
-  /* width: 150px; */
-  margin: 30px;
+  border-radius: 4px; 
+  position: absolute;
+  margin: auto;
+  right: 15px;
+  top: 0;
+  bottom: 0;
+  height: 35px;
  }
  
-.topnav h5  {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}

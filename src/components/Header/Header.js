@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';  
+import React, { useState } from 'react';  
 import './styles.css'; 
 import {CountryObject} from '../../config/Constants';
 
@@ -9,7 +9,7 @@ function Header (props) {
       return (
             
         <div className="topnav"> 
-        <h5>MyNews</h5> 
+        <span>MyNews</span> 
         <a href="#home">Home</a>
         <select 
         className="selectCountry" 
