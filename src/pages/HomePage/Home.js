@@ -1,11 +1,13 @@
 import React, { Component } from 'react';  
-import { Grid } from 'semantic-ui-react';
+import { Grid, Pagination } from 'semantic-ui-react';
 import {Header} from '../../components/Header';
 import { SourceCard } from '../../components/SourceCard';
 import { Container, Row, Col } from 'react-bootstrap';
 import * as Constants from '../../config/Constants';
 import API from '../../config/AxiosBaseUrl';
 import './styles.css';
+import CategoryPopup from '../../components/CategoryPopUp';
+
 class Home extends Component { 
     constructor(){
         super();
@@ -30,10 +32,10 @@ class Home extends Component {
         API.get(`sources?country=${countryCode}&apiKey=${Constants.ApiKey}`)
       .then(res => {
         
-        console.log('get res', res.data.sources.slice(0,10));
+        console.log('get res', res.data.sources.slice(0,5));
         
         this.setState({
-            sourceCardData: res.data.sources.slice(0,10),
+            sourceCardData: res.data.sources.slice(0,6),
         });
       })
     }
@@ -53,14 +55,16 @@ class Home extends Component {
      </Grid.Row>
      </Grid> 
         
-     <div className="pagination">
+     {/* <div className="pagination">
           <span>&laquo;</span>
           <span className="active">1</span>
           <span>2</span>
           <span>3</span>
           <span>4</span>
           <span>&raquo;</span>
-        </div>
+        </div> */}
+         <Pagination defaultActivePage={1} disabled totalPages={5} />
+         
         
         </div>
       );

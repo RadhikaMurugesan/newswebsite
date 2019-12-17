@@ -10,7 +10,7 @@ function Header (props) {
             
         <div className="topnav"> 
         <span>MyNews</span> 
-        <a href="#home">Home</a>
+        <a href="#home">Source</a>
         <select 
         className="selectCountry" 
         value={country} 

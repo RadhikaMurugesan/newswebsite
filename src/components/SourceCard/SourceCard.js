@@ -1,21 +1,26 @@
 import React from 'react'; 
-import { FaGlobe, FaBusinessTime, FaNewspaper, FaAirFreshener, FaMedapps, FaTablet, FaBasketballBall, FaTrello } from "react-icons/fa";
-import { Card, Icon } from 'semantic-ui-react'
+import { FaGlobe } from "react-icons/fa";
+import CategoryPopup from '../CategoryPopUp/CategoryPopup';
 import './styles.css';
 
-function random_bg_color() {
-    var x = Math.floor(Math.random() * 256);
-    var y = Math.floor(Math.random() * 256);
-    var z = Math.floor(Math.random() * 256);
-    var bgColor = "rgb(" + x + "," + y + "," + z + ")";
- console.log(bgColor);
-  return bgColor;
-   
-    }
 
+
+const bgArray = ['#FF004D', '#9D0B28', '#5A082D', '#33030D', '#801336', '#C72C41'];
+function randomNoRepeats(array) {
+        var copy = array.slice(0);
+        return function() {
+          if (copy.length < 1) { copy = array.slice(0); }
+          var index = Math.floor(Math.random() * copy.length);
+          var item = copy[index];
+          copy.splice(index, 1);
+          return item;
+        };
+      }
+      
+      var chooser = randomNoRepeats(bgArray);
 function SourceCard(props) {
    
-      let bgColor = random_bg_color();
+      let bgColor = chooser();
     console.log('bgcolor', bgColor);
     
         
@@ -30,28 +35,14 @@ function SourceCard(props) {
                     </div>
                     <div className="linkDiv">
                             <div>
-                                    <span className="catStyle">{props.sourceCardData.category[0].toUpperCase()+props.sourceCardData.category.slice(1)}</span>
-                                    <span>
-                                            {
-                                            props.sourceCardData.category == 'business' ? <FaBusinessTime />
-                                                    :
-                                                    props.sourceCardData.category == 'general' ? <FaNewspaper />
-                                                            :
-                                                            props.sourceCardData.category == 'entertainment' ? <FaAirFreshener />
-                                                                    :
-                                                                    props.sourceCardData.category == 'health' ? <FaMedapps />
-                                                                            :
-                                                                            props.sourceCardData.category == 'science' ? <FaTablet />
-                                                                                    :
-                                                                                    props.sourceCardData.category == 'sports' ? <FaBasketballBall />
-                                                                                            :
-                                                                                            props.sourceCardData.category == 'technology' ? <FaTrello />
-                                                                                                    :
-                                                                                                    null
-                                    }
-                                    </span>
+                            <CategoryPopup
+                            category={props.sourceCardData.category}
+                            />
+                                   
+                                   
                             </div>
-                            <div><a href={props.sourceCardData.url} target="_blank"><FaGlobe /></a></div>
+                            <div>
+                                    <a href={props.sourceCardData.url} target="_blank"><FaGlobe /></a></div>
                     </div>
             </div>
         
