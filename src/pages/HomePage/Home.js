@@ -1,76 +1,79 @@
-import React, { Component } from 'react';  
+import React, { Component } from 'react';
 import { Grid, Pagination } from 'semantic-ui-react';
-import {Header} from '../../components/Header';
+import { Header } from '../../components/Header';
 import { SourceCard } from '../../components/SourceCard';
 import { Container, Row, Col } from 'react-bootstrap';
 import * as Constants from '../../config/Constants';
 import API from '../../config/AxiosBaseUrl';
 import './styles.css';
-import CategoryPopup from '../../components/CategoryPopUp';
+import PaginationComp from '../../components/Pagination';
 
-class Home extends Component { 
-    constructor(){
+class Home extends Component {
+    constructor() {
         super();
         this.state = {
-            
-            sourceCardData: []
+
+            sourceCardData: [],
+            pageOfItems: []
         }
+        this.onChangePage = this.onChangePage.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getSourceCardData(Constants.CountryCode);
-      
+
+    }
+
+    onChangePage(pageOfItems) {
+        // update state with new page of items
+        this.setState({ pageOfItems: pageOfItems });
     }
 
     changeCountry = (countryCode) => {
         console.log("changeCountry", countryCode);
         this.getSourceCardData(countryCode);
-      
+
     }
 
     getSourceCardData = (countryCode) => {
         API.get(`sources?country=${countryCode}&apiKey=${Constants.ApiKey}`)
-      .then(res => {
-        
-        console.log('get res', res.data.sources.slice(0,5));
-        
-        this.setState({
-            sourceCardData: res.data.sources.slice(0,6),
-        });
-      })
+            .then(res => {
+
+
+                this.setState({
+                    sourceCardData: res.data.sources
+                });
+            })
     }
 
-    render(){    
-    return (
-        <div >
-        <Header changeCountry = {this.changeCountry}/>
-      
-        <Grid columns={4} divided className="grid">
-    <Grid.Row>
-       {this.state.sourceCardData.map((sourceObject) => 
-       <Grid.Column>
-           <SourceCard sourceCardData ={sourceObject}/>
-           </Grid.Column>
-       )}
-     </Grid.Row>
-     </Grid> 
-        
-     {/* <div className="pagination">
-          <span>&laquo;</span>
-          <span className="active">1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>4</span>
-          <span>&raquo;</span>
-        </div> */}
-         <Pagination defaultActivePage={1} disabled totalPages={5} />
-         
-        
-        </div>
-      );
+    render() {
+        return (
+            <div >
+                <Header changeCountry={this.changeCountry} />
+                {
+                    (this.state.sourceCardData.length) ?
+                        <div>
+                            <Grid columns={4} divided className="grid">
+                                <Grid.Row>
+                                    {this.state.pageOfItems.map((sourceObject) =>
+                                        <Grid.Column>
+                                            <SourceCard sourceCardData={sourceObject} />
+                                        </Grid.Column>
+                                    )}
+                                </Grid.Row>
+                            </Grid>
+                            <PaginationComp initialPage={1} pageSize={6} items={this.state.sourceCardData} onChangePage={this.onChangePage} /> </div> :
+                        <div className='errorMsgBlock'>
+                            <h1 className='errorMsg'>Source Not Available</h1>
+                        </div>
+                }
+
+
+            </div>
+        );
     }
-   
-  
+
+
 }
 
 export default Home;

@@ -21,3 +21,19 @@
   color: white;
   border: 1px solid #0099FF;
 }
+
+.errorMsgBlock {
+  display: flex;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: gray;
+  margin: 30px;
+  height: 100px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.errorMsg {
+  text-align: center;
+}

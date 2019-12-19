@@ -1,7 +1,18 @@
+import { faBriefcase, faMedkit, faFlask, faHome, faBook, faGlobe, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 
 export const ApiKey = "0c194d4e4c3043518b4e8745283f898f";
 
 export const CountryCode = "IN";
+
+export const Categories = [
+    {"name":"business", "icon": faBriefcase},
+    {"name":"general", "icon": faNewspaper},
+    {"name":"entertainment", "icon": faBook},
+    {"name":"science", "icon": faFlask},
+    {"name":"health", "icon": faMedkit},
+    {"name":"technology", "icon": faHome},
+    {"name":"sports", "icon": faHome}
+]
 
 export const CountryObject = [    
    

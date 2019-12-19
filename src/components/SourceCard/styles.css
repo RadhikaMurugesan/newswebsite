@@ -1,41 +1,44 @@
 .mainDiv {
-    margin: 10px;
-    height: 250px;
-    width: 400px;
-    padding: 10px;
-   }
-
-.nameDiv{
- color: white;
-    font-size: 17px;
-
+  margin: 10px;
+  height: 200px;
+  width: 400px;
+  padding: 10px;
+  position: relative;
+    padding-bottom: 200px;
+ 
 }
 
-.descDiv{
-     color: white;
-   
+.nameDiv {
+  color: white;
+  font-size: 17px;
 }
 
-.descText{
-   
-    color: white;
-    font-size: 14px;
+.descDiv {
+  color: white;
+}
+
+.descText {
+  color: white;
+  font-size: 14px;
 }
 
 .mainDiv a {
-    color: #ddd;
-  }
+  color: #ddd;
+}
 
-.linkDiv{
-    
+.linkDiv {
     display: flex;
-    /* flex-direction: row; */
-    justify-content: space-between; 
-    color: white;
-   
+    flex-direction: row;
+    justify-content: space-between;
+  color: white;
+  position: absolute;
+  bottom: 0;
+ 
 }
 
-.catStyle {
-    margin-right: 5px;
-}
 
+
+.url {
+   margin-left:173px;
+   margin-bottom: 5px;
+  }
