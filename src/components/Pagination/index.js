@@ -1,2 +1,2 @@
-import Pagination from './PaginationComp';
+import Pagination from './Pagination';
 export default Pagination;

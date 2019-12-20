@@ -1,8 +1,6 @@
 import React from 'react';
-import { FaGlobe } from "react-icons/fa";
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
-import IndividualPage from '../../pages/IndividualPage/IndividualPage';
-import IconComponent from '../IconComponent/IconComponent';
+import { Link } from 'react-router-dom'  
+import Icon from '../Icon/Icon';
 import './styles.css';
 
 
@@ -28,17 +26,17 @@ function SourceCard(props) {
 
 
         return (
-                <Router>
+               
                         <div className="mainDiv" style={{ backgroundColor: bgColor }}>
                                 <div className="nameDiv">
-                                        <Link to="/individualpage"><h4 className="nameText">{props.sourceCardData.name}</h4></Link>
+                                <Link to={`/topheadlines/${props.sourceCardData.id}`} ><h4 className="nameText">{props.sourceCardData.name}</h4></Link>
                                 </div>
                                 <div className="descDiv">
                                         <p className="descText">{props.sourceCardData.description}</p>
                                 </div>
                                 <div className="linkDiv">
                                         <div className='category'>
-                                                <IconComponent
+                                                <Icon
                                                         category={props.sourceCardData.category}
                                                         icon="category"
                                                 />
@@ -47,7 +45,7 @@ function SourceCard(props) {
                                         </div>
                                         <div className='url'>
                                                 <a href={props.sourceCardData.url} target="_blank">
-                                                        <IconComponent
+                                                        <Icon
                                                                 url={props.sourceCardData.url}
                                                                 icon="url"
                                                         />
@@ -57,8 +55,7 @@ function SourceCard(props) {
                                 </div>
                         </div>
 
-                        <Route path="/individualpage" component={IndividualPage} />
-                </Router>
+                      
         );
 
 

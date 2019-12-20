@@ -10,6 +10,13 @@
 
 #### src/pages/HomePage - It is the container page for integrating all the home page components and fetched data from the api.
 
-#### src/components/IconComponent - It describes reusable icon component.
+#### src/components/Icon - It describes reusable icon component.
 
 #### src/components/Pagination - It describes pagination component for source cards.
+
+#### src/components/NewsCard - It describes top headlines from source.
+
+#### src/pages/TopHeadlines - It is a wrapper class for newscard component and fetch data for topheadlines.
+
+#### src/config/RouteNav - Router page for all routes.
+

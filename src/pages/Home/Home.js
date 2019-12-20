@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Grid, Pagination } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { Header } from '../../components/Header';
 import { SourceCard } from '../../components/SourceCard';
 import { Container, Row, Col } from 'react-bootstrap';
 import * as Constants from '../../config/Constants';
 import API from '../../config/AxiosBaseUrl';
 import './styles.css';
-import PaginationComp from '../../components/Pagination';
+import Pagination from '../../components/Pagination';
 
 class Home extends Component {
     constructor() {
@@ -38,7 +38,7 @@ class Home extends Component {
     getSourceCardData = (countryCode) => {
         API.get(`sources?country=${countryCode}&apiKey=${Constants.ApiKey}`)
             .then(res => {
-
+                console.log('response', res.data.sources)
 
                 this.setState({
                     sourceCardData: res.data.sources
@@ -62,7 +62,7 @@ class Home extends Component {
                                     )}
                                 </Grid.Row>
                             </Grid>
-                            <PaginationComp initialPage={1} pageSize={6} items={this.state.sourceCardData} onChangePage={this.onChangePage} /> </div> :
+                            <Pagination initialPage={1} pageSize={6} items={this.state.sourceCardData} onChangePage={this.onChangePage} /> </div> :
                         <div className='errorMsgBlock'>
                             <h1 className='errorMsg'>Source Not Available</h1>
                         </div>
