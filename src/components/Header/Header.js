@@ -10,8 +10,10 @@ function Header (props) {
             
         <div className="topnav"> 
         <span>MyNews</span> 
-        <a href="#home">Source</a>
-        <select 
+        <a href="#home">{props.page}</a>
+        {
+          (props.page == "Source") ?
+          <select 
         className="selectCountry" 
         value={country} 
         onChange={e => {
@@ -20,8 +22,12 @@ function Header (props) {
         }}  
              >
         {CountryObject.map((country) => <option value={country.code}>{country.name}</option> )}
-        </select>
+        </select> :
+        null
+        }
+        
     </div>
+
          
       )
     }

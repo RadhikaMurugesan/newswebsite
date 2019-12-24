@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Loader } from 'semantic-ui-react';
 import { Header } from '../../components/Header';
 import { SourceCard } from '../../components/SourceCard';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -8,11 +8,12 @@ import API from '../../config/AxiosBaseUrl';
 import './styles.css';
 import Pagination from '../../components/Pagination';
 
+
 class Home extends Component {
     constructor() {
         super();
         this.state = {
-
+            loading: true,
             sourceCardData: [],
             pageOfItems: []
         }
@@ -21,6 +22,7 @@ class Home extends Component {
 
     componentDidMount() {
         this.getSourceCardData(Constants.CountryCode);
+       
 
     }
 
@@ -41,7 +43,8 @@ class Home extends Component {
                 console.log('response', res.data.sources)
 
                 this.setState({
-                    sourceCardData: res.data.sources
+                    sourceCardData: res.data.sources,
+                    loading: false
                 });
             })
     }
@@ -49,26 +52,27 @@ class Home extends Component {
     render() {
         return (
             <div >
-                <Header changeCountry={this.changeCountry} />
+                <Header changeCountry={this.changeCountry} page="Source"/>
                 {
+                   ( this.state.loading) ?
+                   <Loader active = {this.state.loading}/> :
+
+             
                     (this.state.sourceCardData.length) ?
                         <div>
-                            <Grid columns={4} divided className="grid">
-                                <Grid.Row>
+                            <Grid columns={3} padded>
                                     {this.state.pageOfItems.map((sourceObject) =>
                                         <Grid.Column>
                                             <SourceCard sourceCardData={sourceObject} />
                                         </Grid.Column>
                                     )}
-                                </Grid.Row>
                             </Grid>
                             <Pagination initialPage={1} pageSize={6} items={this.state.sourceCardData} onChangePage={this.onChangePage} /> </div> :
                         <div className='errorMsgBlock'>
                             <h1 className='errorMsg'>Source Not Available</h1>
                         </div>
                 }
-
-
+            
             </div>
         );
     }

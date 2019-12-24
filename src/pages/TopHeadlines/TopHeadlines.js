@@ -1,13 +1,15 @@
 import React, {Component} from "react";
-import { Grid } from 'semantic-ui-react';
+import { Grid, Loader } from 'semantic-ui-react';
 import NewsCard from '../../components/NewsCard';
 import API from '../../config/AxiosBaseUrl';
 import * as Constants from '../../config/Constants';
+import { Header } from '../../components/Header';
 export default class TopHeadlines extends Component {
   constructor() {
     super();
     this.state = {
-       newsCardData: []
+       newsCardData: [],
+       loading: true
     }
     
 }
@@ -20,7 +22,8 @@ componentDidMount() {
       console.log('response', res.data.articles)
 
       this.setState({
-        newsCardData: res.data.articles
+        newsCardData: res.data.articles,
+        loading: false
       });
   })
 
@@ -30,18 +33,22 @@ componentDidMount() {
     
     return (
       <div>
-        <h2>TopHeadlines</h2>
-        <Grid columns={4} divided className="grid">
-                                <Grid.Row>
+        <Header page="Top Headlines"/>
+        {
+          (this.state.loading) ?
+          <Loader active = {this.state.loading} />
+       :
+        
+        <Grid columns={'four'}>
                                     {this.state.newsCardData.map((object) =>
                                         <Grid.Column>
                                             <NewsCard newsCardData={object} />
                                         </Grid.Column>
                                     )}
-                                </Grid.Row>
                             </Grid>
-        
+  }
       </div>
+      
     );
   }  
   }
