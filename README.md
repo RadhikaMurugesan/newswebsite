@@ -8,7 +8,7 @@
 
 #### src/config/AxiosBaseUrl.tsx - It contains the axios base instance for base url.
 
-#### src/pages/HomePage - It is the container page for integrating all the home page components and fetched data from the api.
+#### src/pages/Home - It is the container page for integrating all the home page components and fetched data from the api.
 
 #### src/components/Icon - It describes reusable icon component.
 

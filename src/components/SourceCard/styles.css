@@ -1,18 +1,15 @@
-.mainDiv {
-  height: 160px;
-  /* padding-bottom: 200px; */
+.main {
+  height: 160px;  
   padding: 10px;
   position: relative;
-  
- 
 }
 
-.nameDiv {
+.name {
   color: white;
   font-size: 17px;
 }
 
-.descDiv {
+.desc {
   color: white;
 }
 
@@ -21,23 +18,19 @@
   font-size: 14px;
 }
 
-.mainDiv a {
+.main a {
   color: #ddd;
 }
 
-.linkDiv {
-  display: flex;   
+.link {
+  display: flex;
   justify-content: space-between;
-  color: white;  
-  bottom: 0;
- 
+  color: white;
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
 }
-
-.category {
-  float: left;
-}
-
 
 .url {
-   float: right;
-  }
+  right: 10px;
+}

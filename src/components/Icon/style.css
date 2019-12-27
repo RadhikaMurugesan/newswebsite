@@ -14,21 +14,21 @@
   position: absolute;
   z-index: 1;
   top: -5px;
-  left: 100%; 
+  left: 100%;
   margin-left: 0px;
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .category .categoryName::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent #555 transparent transparent;
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #555 transparent transparent;
 }
 
 .category:hover .categoryName {
@@ -51,7 +51,7 @@
   position: absolute;
   z-index: 1;
   top: -5px;
-  right: 128%; 
+  right: 128%;
   bottom: 0;
   margin-left: 0px;
   opacity: 0;
@@ -74,21 +74,18 @@
   opacity: 1;
 }
 
- 
 .urlName-left {
   top: -5px;
-  bottom:auto;
-  right: 128%;  
-} 
+  bottom: auto;
+  right: 128%;
+}
 .urlName-left::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent transparent #555;
-} 
- 
-
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #555;
+}
