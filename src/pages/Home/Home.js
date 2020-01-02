@@ -6,51 +6,53 @@ import * as Constants from "../../config/Constants";
 import API from "../../config/AxiosBaseUrl";
 import "./styles.css";
 import Pagination from "../../components/Pagination";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {getSource, getSourcePending, getSourceForPagination} from '../../reducers/reducers';
+import {fetchSource, fetchSourcePagination} from '../../actions/index';
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      sourceCardData: [],
-      pageOfItems: []
-    };
-    this.onChangePage = this.onChangePage.bind(this);
+  constructor(props) {
+    super(props);
+    this.shouldComponentRender = this.shouldComponentRender.bind(this);
+    // this.onChangePage = this.onChangePage.bind(this);
   }
 
   componentDidMount() {
-    this.getSourceCardData(Constants.CountryCode);
+    const {fetchSource} = this.props;
+    fetchSource("US");
   }
 
+  shouldComponentRender() {
+    const {loading} = this.props;
+    if(this.loading === false) return false;
+    // more tests
+    return true;
+}
+
+
   onChangePage(pageOfItems) {
-    this.setState({ pageOfItems: pageOfItems });
+    fetchSourcePagination(pageOfItems);
   }
 
   changeCountry = countryCode => {
-    this.getSourceCardData(countryCode);
+    fetchSource(Constants.CountryCode);
   };
 
-  getSourceCardData = countryCode => {
-    API.get(`sources?country=${countryCode}&apiKey=${Constants.ApiKey}`).then(
-      res => {
-        this.setState({
-          sourceCardData: res.data.sources,
-          loading: false
-        });
-      }
-    );
-  };
+
 
   render() {
+    const {sources, loading, pageOfItems} = this.props;
+    console.log('this.props', this.props);
     return (
       <div>
         <Header changeCountry={this.changeCountry} page="Source" />
-        {this.state.loading ? (
-          <Loader active={this.state.loading} />
-        ) : this.state.sourceCardData.length ? (
+        {loading ? (
+          <Loader active={loading} />
+        ) : sources.length ? (
           <div>
             <Grid columns={3} padded>
-              {this.state.pageOfItems.map(sourceObject => (
+              {pageOfItems.map(sourceObject => (
                 <Grid.Column>
                   <SourceCard sourceCardData={sourceObject} />
                 </Grid.Column>
@@ -59,7 +61,7 @@ class Home extends Component {
             <Pagination
               initialPage={1}
               pageSize={6}
-              items={this.state.sourceCardData}
+              items={sources}
               onChangePage={this.onChangePage}
             />{" "}
           </div>
@@ -73,4 +75,20 @@ class Home extends Component {
   }
 }
 
-export default Home;
+
+
+const mapStateToProps = state => ({
+  sources: getSource(state),
+  pending: getSourcePending(state),
+  pageOfItems: getSourceForPagination(state)
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchSource: fetchSource,
+  fetchSourcePagination
+}, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
