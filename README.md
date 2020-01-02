@@ -20,3 +20,7 @@
 
 #### src/config/RouteNav - Router page for all routes.
 
+#### src/actions/action - It contains the action creators.
+
+#### src/reducers/reducers - It contains the reducer for store.
+
