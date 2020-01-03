@@ -5,44 +5,40 @@ import API from "../../config/AxiosBaseUrl";
 import * as Constants from "../../config/Constants";
 import { Header } from "../../components/Header";
 import Pagination from "../../components/Pagination";
-export default class TopHeadlines extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {getTopSource, getSourcePending, getSourceForPagination} from '../../reducers/reducers';
+import {fetchTopSource, fetchSourcePagination} from '../../actions/index';
+
+class TopHeadlines extends Component {
   constructor() {
     super();
-    this.state = {
-      newsCardData: [],
-      loading: true,
-      pageOfItems: []
-    };
     this.onChangePage = this.onChangePage.bind(this);
   }
 
   componentDidMount() {
     const { id } = this.props.match.params;
-
-    API.get(`top-headlines?sources=${id}&apiKey=${Constants.ApiKey}`).then(
-      res => {
-        this.setState({
-          newsCardData: res.data.articles,
-          loading: false
-        });
-      }
-    );
+    const {fetchTopSource} = this.props;
+    fetchTopSource(id);
+    
   }
 
   onChangePage(pageOfItems) {
-    this.setState({ pageOfItems: pageOfItems });
+    const {fetchSourcePagination} = this.props;
+    fetchSourcePagination(pageOfItems);
   }
 
   render() {
+    const {topSources, loading, pageOfItems} = this.props;
     return (
       <div>
         <Header page="Top Headlines" />
-        {this.state.loading ? (
-          <Loader active={this.state.loading} />
+        {loading ? (
+          <Loader active={loading} />
         ) : (
           <div>
             <Grid columns={"four"} padded>
-              {this.state.pageOfItems.map(object => (
+              {pageOfItems.map(object => (
                 <Grid.Column>
                   <NewsCard newsCardData={object} />
                 </Grid.Column>
@@ -51,12 +47,27 @@ export default class TopHeadlines extends Component {
             <Pagination
               initialPage={1}
               pageSize={4}
-              items={this.state.newsCardData}
+              items={topSources}
               onChangePage={this.onChangePage}
-            />{" "}
+            />
           </div>
         )}
       </div>
     );
   }
 }
+const mapStateToProps = state => ({
+  topSources: getTopSource(state),
+  loading: getSourcePending(state),
+  pageOfItems: getSourceForPagination(state)
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchTopSource: fetchTopSource,
+  fetchSourcePagination
+}, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TopHeadlines);

@@ -1,11 +1,12 @@
-import {FETCH_SOURCE_PENDING, FETCH_SOURCE_SUCCESS, FETCH_SOURCE_FOR_PAGINATION} from '../actions/actions';
+import {FETCH_SOURCE_PENDING, FETCH_SOURCE_SUCCESS, FETCH_SOURCE_FOR_PAGINATION, FETCH_TOPHEADLINES} from '../actions/actions';
 
 
 const initialState = {
     loading: false,
     sources: [],
     error: null,
-    pageOfItems: []
+    pageOfItems: [],
+    topSources: []
 }
 
 export default function sourceReducer(state = initialState, action) {
@@ -26,6 +27,13 @@ export default function sourceReducer(state = initialState, action) {
                 ...state,
                 pageOfItems: action.payload
             }
+
+        case FETCH_TOPHEADLINES:
+            return {
+                ...state,
+                loading: false,
+                topSources: action.payload
+            }
         default: 
             return state;
     }
@@ -34,3 +42,4 @@ export default function sourceReducer(state = initialState, action) {
 export const getSource = state => state.sources;
 export const getSourcePending = state => state.loading;
 export const getSourceForPagination = state => state.pageOfItems;
+export const getTopSource = state => state.topSources

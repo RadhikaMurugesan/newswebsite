@@ -13,30 +13,23 @@ import {fetchSource, fetchSourcePagination} from '../../actions/index';
 
 class Home extends Component {
   constructor(props) {
-    super(props);
-    this.shouldComponentRender = this.shouldComponentRender.bind(this);
-    // this.onChangePage = this.onChangePage.bind(this);
+    super(props);   
+    this.onChangePage = this.onChangePage.bind(this);
   }
 
   componentDidMount() {
     const {fetchSource} = this.props;
-    fetchSource("US");
+    fetchSource(Constants.CountryCode);
   }
 
-  shouldComponentRender() {
-    const {loading} = this.props;
-    if(this.loading === false) return false;
-    // more tests
-    return true;
-}
-
-
   onChangePage(pageOfItems) {
+    const {fetchSourcePagination} = this.props;
     fetchSourcePagination(pageOfItems);
   }
 
   changeCountry = countryCode => {
-    fetchSource(Constants.CountryCode);
+    const {fetchSource} = this.props;
+    fetchSource(countryCode);
   };
 
 
@@ -63,7 +56,7 @@ class Home extends Component {
               pageSize={6}
               items={sources}
               onChangePage={this.onChangePage}
-            />{" "}
+            />
           </div>
         ) : (
           <div className="errorMsgBlock">
@@ -79,7 +72,7 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
   sources: getSource(state),
-  pending: getSourcePending(state),
+  loading: getSourcePending(state),
   pageOfItems: getSourceForPagination(state)
 })
 
